@@ -68,7 +68,7 @@ def update_book(book_id: str, book: Book):
 
 
 
-@app.put("/books/{book_id}/decrement")
+@app.put("/books/{book_id}/decrement", include_in_schema=False)
 def decrement_available_copies(book_id: str):
     cursor.execute("SELECT available_copies FROM books WHERE id=?", (book_id,))
     book = cursor.fetchone()
@@ -88,8 +88,7 @@ def decrement_available_copies(book_id: str):
     return {"message": f"Book ID {book_id} now has {updated_copies} copies left."}
 
 
-
-@app.put("/books/{book_id}/increment")
+@app.put("/books/{book_id}/increment", include_in_schema=False)
 def increment_available_copies(book_id: str):
     cursor.execute("SELECT available_copies FROM books WHERE id=?", (book_id,))
     book = cursor.fetchone()
@@ -114,4 +113,3 @@ def delete_book(book_id: str):
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="127.0.0.1", port=8001)
-
