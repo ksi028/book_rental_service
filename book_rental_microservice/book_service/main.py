@@ -5,7 +5,7 @@ import sqlite3
 
 app = FastAPI()
 
-# ✅ Initialize SQLite database
+
 conn = sqlite3.connect("books.db", check_same_thread=False)
 cursor = conn.cursor()
 cursor.execute("""
@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS books (
 """)
 conn.commit()
 
-# ✅ Pydantic model for books
+
 class Book(BaseModel):
     title: str
     author: str
